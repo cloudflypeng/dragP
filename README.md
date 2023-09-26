@@ -1,8 +1,47 @@
-# React + Vite
+dragP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+这是一个基于直觉的拖拽交互库,你只需要聚焦于拖和放就可以
 
-Currently, two official plugins are available:
+希望只使用dragStart和drop就完成拖拽交互
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+基本用法
+```javascript
+const dragStartFunction = dragP(func, options)
+// options 可选,目前仅支持虚拟节点和目标容器的样式
+// func即原本的方法,本库在对象上扩展了两个方法 remember 和 activeTarget
+// remember 用于 传递一个对象数据
+// activeTarget 用于激活目标容器, 不激活的容器是不可拖拽进去的
+
+```
+
+示例
+
+```javascript
+import { dragP } from 'dragP'
+
+const handleDrag = dragP((e)=>{
+	
+	console.log('startgragOrigin :>> ', );
+	
+	e.dataTransfer.setData('text', 'from')
+	
+	// 传递数据
+	
+	e.remember({a: 1})
+	
+	// 激活目标容器的样式可以传选择器和dom
+	
+	// e.activeTarget(['.target'])
+	
+	// e.activeTarget(['#xxx'])
+	
+	// e.activeTarget([ document.getElementById('wow4')])
+	
+	}, {
+	
+	clonedStyle: extraStyle, // 拖拽时的样式
+	
+	targetStyle // 目标容器样式
+
+})
+```
