@@ -19,29 +19,15 @@ const dragStartFunction = dragP(func, options)
 ```javascript
 import { dragP } from 'dragP'
 
-const handleDrag = dragP((e)=>{
-	
-	console.log('startgragOrigin :>> ', );
-	
-	e.dataTransfer.setData('text', 'from')
-	
+const handleDrag = dragP((e)=>{	
 	// 传递数据
-	
 	e.remember({a: 1})
-	
 	// 激活目标容器的样式可以传选择器和dom
-	
 	// e.activeTarget(['.target'])
-	
-	// e.activeTarget(['#xxx'])
-	
-	// e.activeTarget([ document.getElementById('wow4')])
-	
+	// e.activeTarget(['#target'])
+	// e.activeTarget([ document.getElementById('target')])
 	}, {
-	
 	clonedStyle: extraStyle, // 拖拽时的样式
-	
 	targetStyle // 目标容器样式
-
 })
 ```
