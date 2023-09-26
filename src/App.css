@@ -1,0 +1,21 @@
+#root{
+  display: flex;
+
+  height: 100vh;
+  width: 100vw;
+}
+.from {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  color: white;
+}
+
+.target{
+  min-width: 100px;
+  min-height: 100px;
+  padding: 20px;
+  background-color: blue;
+  color: white;
+  margin: 10px 0;
+}
