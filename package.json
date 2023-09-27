@@ -5,8 +5,7 @@
   "module": "./dist/index.js",
   "main": "./dist/index.umd.cjs",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
