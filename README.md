@@ -31,3 +31,13 @@ const handleDrag = dragP((e)=>{
 	targetStyle // 目标容器样式
 })
 ```
+
+本地使用
+```javascript
+git clone [项目地址]
+yarn install
+yarn run dev
+```
+
+在线地址
+https://codesandbox.io/s/gallant-cori-ccydgs?file=/src/App.js
