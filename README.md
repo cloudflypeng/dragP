@@ -27,7 +27,7 @@ const handleDrag = dragP((e)=>{
 	// e.activeTarget(['#target'])
 	// e.activeTarget([ document.getElementById('target')])
 	}, {
-	clonedStyle: extraStyle, // 拖拽时的样式
+	clonedStyle, // 拖拽时的样式
 	targetStyle // 目标容器样式
 })
 ```

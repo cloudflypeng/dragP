@@ -3,11 +3,12 @@ import { nanoid } from "nanoid";
 let cloneDom = null;
 let cloneDomId = null;
 let targetDomList = []
+let needRemoveDomList = [];
 
 let defDragover = e => {
   e.preventDefault();
 }
-let needRemoveDomList = [];
+
 
 
 export const addDragNode = () => {
@@ -37,6 +38,9 @@ let clear = (e) => {
   needRemoveDomList.forEach(item=>{
     item.remove()
   })
+
+  targetDomList = []
+  needRemoveDomList = []
 
   removeDragNode()
   cloneDom = null;
@@ -94,7 +98,6 @@ let activeTarget = (list = []) =>{
 export const dragP = (fn, options) => {
 
   return e =>{
-
     let originDom = e.target;
     cloneDom = originDom.cloneNode(true);
     // 添加拖拽节点

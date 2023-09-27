@@ -2,6 +2,7 @@ import './App.css'
 import './lib'
 
 import {dragP} from '../dist/index.js'
+// import {dragP} from './lib'
 
 const extraStyle = {
   backgroundColor: 'green',
