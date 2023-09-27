@@ -119,6 +119,7 @@ export const dragP = (fn, options) => {
 }
 
 function isDom(obj) {
+  console.log('obj :>> ', obj);
   return obj instanceof HTMLElement;
 }
 

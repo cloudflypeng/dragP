@@ -1,8 +1,10 @@
 import './App.css'
 import './lib'
 
-import {dragP} from '../dist/index.js'
-// import {dragP} from './lib'
+// import {dragP} from '../dist/index.js'
+import {dragP} from './lib'
+
+import Group from './group.jsx'
 
 const extraStyle = {
   backgroundColor: 'green',
@@ -42,15 +44,7 @@ function App() {
 
   return (
     <div>
-      <div className='from' draggable onDragStart={handleDrag}>
-        from
-      </div>
-
-      <div className='target' id="xxx" onDrop={handleDrop} >target</div>
-      <div className='target' onDrop={handleDrop} >target2</div>
-      <div className='target' onDrop={handleDrop} >target</div>
-      <div className='target' id="wow4" onDrop={handleDrop} >target431</div>
-      <div className='target' id="wow4" draggable >3213</div>
+      <Group />
     </div>
   )
 
