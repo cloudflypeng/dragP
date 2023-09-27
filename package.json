@@ -1,10 +1,12 @@
 {
-  "name": "drag-demo",
-  "private": true,
-  "version": "0.0.1",
+  "name": "drag-p",
+  "version": "0.0.2",
   "type": "module",
   "module": "./dist/index.js",
   "main": "./dist/index.umd.cjs",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
