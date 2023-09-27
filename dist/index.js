@@ -1,55 +1,61 @@
-let m = (e = 21) => crypto.getRandomValues(new Uint8Array(e)).reduce((t, r) => (r &= 63, r < 36 ? t += r.toString(36) : r < 62 ? t += (r - 26).toString(36).toUpperCase() : r > 62 ? t += "-" : t += "_", t), ""), n = null, o = null, c = [], d = [], g = (e) => {
-  e.preventDefault();
+let D = (t = 21) => crypto.getRandomValues(new Uint8Array(t)).reduce((e, r) => (r &= 63, r < 36 ? e += r.toString(36) : r < 62 ? e += (r - 26).toString(36).toUpperCase() : r > 62 ? e += "-" : e += "_", e), ""), a = null, n = null, c = [], d = [], m = (t) => {
+  t.preventDefault();
 };
-const v = () => {
-  n.style.position = "absolute", n.style.top = "-100vh", n.style.left = "-100vw", n.style.pointerEvents = "none", n.id = m(), o = n.id, document.body.appendChild(n);
-}, f = () => {
-  let e = document.getElementById(o);
-  e == null || e.remove();
+const E = (t) => {
+  a.style.position = "absolute", a.style.top = "-100vh", a.style.left = "-100vw", a.style.zIndex = "2147483647", a.style.pointerEvents = "none", a.id = D(), n = a.id, t.target.parentNode.appendChild(a);
+}, h = () => {
+  let t = document.getElementById(n);
+  t == null || t.remove();
 };
-let u = (e) => {
-  e.target.removeEventListener("dragend", u), c.forEach((t) => {
-    t.removeEventListener("dragover", g), t.classList.remove(`${o}-active`);
-  }), d.forEach((t) => {
-    t.remove();
-  }), c = [], d = [], f(), n = null, o = null;
-}, p = (e) => {
-  let t = e.clonedStyle || {};
-  i(t) || Object.keys(t).forEach((l) => {
-    n.style[l] = t[l];
+let v = (t) => {
+  t.target.removeEventListener("dragend", v), c.forEach((e) => {
+    e.removeEventListener("dragover", m), e.classList.remove(`${n}-active`);
+  }), d.forEach((e) => {
+    e.remove();
+  }), c = [], d = [], h(), a = null, n = null;
+}, L = (t) => {
+  let e = t.clonedStyle || {};
+  g(e) || Object.keys(e).forEach((l) => {
+    a.style[l] = e[l];
   });
-  let r = e.targetStyle || {};
-  if (!i(r)) {
+  let r = t.targetStyle || {};
+  if (!g(r)) {
     let l = document.createElement("style");
     l.type = "text/css";
-    let a = "";
+    let o = "";
     Object.keys(r).forEach((s) => {
-      a += `${h(s)}:${r[s]};`;
-    }), l.innerHTML = `.${o}-active {${a}} `, document.head.appendChild(l), d.push(l);
+      o += `${p(s)}:${r[s]};`;
+    }), l.innerHTML = `.${n}-active {${o}} `, document.head.appendChild(l), d.push(l);
   }
-}, y = (e = []) => {
-  e.forEach((t) => {
-    (E(t) ? [t] : document.querySelectorAll(t) || []).forEach((l) => {
-      l.classList.add(`${o}-active`), l.addEventListener("dragover", g), c.push(l);
+}, S = (t = []) => {
+  t.forEach((e) => {
+    (i(e) ? [e] : document.querySelectorAll(e) || []).forEach((l) => {
+      l.classList.add(`${n}-active`), l.addEventListener("dragover", m), c.push(l);
     });
   });
 };
-const D = (e, t) => (r, ...l) => {
-  let a = r.target;
-  n = a.cloneNode(!0), v(), i(t) || p(t), r.dataTransfer.setDragImage(n, 100, 100), a.addEventListener("dragend", u), r.remember = (s) => {
-    r.dataTransfer.setData("text/plain", JSON.stringify(s));
-  }, r.activeTarget = y, console.log("args :>> ", l), e(r, ...l);
+const $ = (t, e) => (r, ...l) => {
+  var f;
+  let o = r.target, s = (f = e.customDragDom) == null ? void 0 : f.call(e, r, ...l);
+  a = i(s) ? s : o.cloneNode(!0), E(r), g(e) || L(e);
+  let u = (e == null ? void 0 : e.offset) || {
+    x: 0,
+    y: 0
+  };
+  r.dataTransfer.setDragImage(a, u.x, u.y), o.addEventListener("dragend", v), r.remember = (y) => {
+    r.dataTransfer.setData("text/plain", JSON.stringify(y));
+  }, r.activeTarget = S, t(r, ...l);
 };
-function E(e) {
-  return console.log("obj :>> ", e), e instanceof HTMLElement;
+function i(t) {
+  return t instanceof HTMLElement;
 }
-function i(e) {
-  return e ? Object.keys(e).length === 0 : !0;
+function g(t) {
+  return t ? Object.keys(t).length === 0 : !0;
 }
-let h = (e) => e.replace(/([A-Z])/g, "-$1").toLowerCase();
+let p = (t) => t.replace(/([A-Z])/g, "-$1").toLowerCase();
 export {
-  v as addDragNode,
-  n as cloneDom,
-  D as dragP,
-  f as removeDragNode
+  E as addDragNode,
+  a as cloneDom,
+  $ as dragP,
+  h as removeDragNode
 };
