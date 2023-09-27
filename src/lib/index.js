@@ -11,14 +11,17 @@ let defDragover = e => {
 
 
 
-export const addDragNode = () => {
+export const addDragNode = (e) => {
   cloneDom.style.position = 'absolute';
   cloneDom.style.top = '-100vh';
   cloneDom.style.left = '-100vw';
+  cloneDom.style.zIndex = '2147483647';
   cloneDom.style.pointerEvents = 'none';
   cloneDom.id = nanoid();
   cloneDomId = cloneDom.id;
-  document.body.appendChild(cloneDom);
+  // 在当前节点位置加, 防止后代选择器样式问题
+  // document.body.appendChild(cloneDom);s
+  e.target.parentNode.appendChild(cloneDom);
 }
 
 export const removeDragNode = () => {
@@ -72,8 +75,6 @@ let handleOptions = options =>{
 
 }
 
-
-
 let activeTarget = (list = []) =>{
 
   list.forEach(item=>{
@@ -97,14 +98,25 @@ let activeTarget = (list = []) =>{
 
 export const dragP = (fn, options) => {
 
-  return e =>{
+  return  (e, ...args)=>{
     let originDom = e.target;
-    cloneDom = originDom.cloneNode(true);
+    // 自定义拖拽节点
+    let customDragDom = options.customDragDom?.(e, ...args);
+    cloneDom = isDom(customDragDom) ? customDragDom : originDom.cloneNode(true); //  target为拖拽节点
+
     // 添加拖拽节点
-    addDragNode();
+    addDragNode(e);
+    
     // 处理options
     if(!isEmptyObject(options)) handleOptions(options);
-    e.dataTransfer.setDragImage(cloneDom, 100, 100);
+
+
+    // 偏移量
+    let offset = options?.offset || { 
+      x: 0,
+      y: 0
+    };
+    e.dataTransfer.setDragImage(cloneDom, offset.x, offset.y);
 
     originDom.addEventListener('dragend', clear)
 
@@ -114,16 +126,16 @@ export const dragP = (fn, options) => {
 
     e.activeTarget = activeTarget;
 
-    fn(e)
+    fn(e, ...args)
   }
 }
 
 function isDom(obj) {
-  console.log('obj :>> ', obj);
   return obj instanceof HTMLElement;
 }
 
 function isEmptyObject(obj) {
+  if(!obj) return true;
   return Object.keys(obj).length === 0;
 }
 // 驼峰转 kabab-case

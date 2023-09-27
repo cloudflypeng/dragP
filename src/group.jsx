@@ -53,23 +53,34 @@ const Group = (props) => {
   const [box, setBox] = useState([]);
   const boxRef = useRef()
 
-  const handleDrag = dragP((e)=>{
+  const handleDrag = dragP((e,num)=>{
+    console.log('num :>> ', num);
     let fruit = e.target.innerText
     e.remember({type: fruit})
     e.activeTarget([boxRef.current])
 
-  }, {
+  },
+  {
     clonedStyle: {
       width: '50px',
       height: '50px',
       borderRadius: '50%',
       padding: '1rem',
       backgroundColor: 'green',
+      color: 'white',
     },
     targetStyle: {
       border: '1px solid red',
+    },
+    offset:{
+      x: 50,
+      y: 50
+    },
+    customDragDom: ()=>{
+      return document.createElement('div')
     }
-  })
+  }
+  )
 
   const handleDrop = e =>{
     const params = JSON.parse(e.dataTransfer.getData('text'))
@@ -84,7 +95,7 @@ const Group = (props) => {
         水果列表
         {fromList.map((item, index) => {
           return (
-            <div className='from fruit border' draggable key={index} onDragStart={handleDrag}>
+            <div className='from fruit border' draggable key={index} onDragStart={(e)=>handleDrag(e, 321)}>
               {item}
             </div>
           );
