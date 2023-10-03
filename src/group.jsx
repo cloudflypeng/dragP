@@ -1,6 +1,7 @@
 import './group.less';
 import { useState, useRef } from 'react';
 import {dragP} from './lib'
+import './App.css'
 
 const fromList = [
   '苹果',
@@ -59,34 +60,38 @@ const Group = (props) => {
     e.remember({type: fruit})
     e.activeTarget([boxRef.current])
 
+    return ()=>{
+      console.log('自定义清理函数');
+    }
+
   },
   {
-    clonedStyle: {
-      width: '50px',
-      height: '50px',
-      borderRadius: '50%',
-      padding: '1rem',
-      backgroundColor: 'green',
-      color: 'white',
-    },
+    // clonedStyle: {
+    //   width: '50px',
+    //   height: '50px',
+    //   borderRadius: '50%',
+    //   padding: '1rem',
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    // },
+    clonedClass: 'cloned-test',
     targetStyle: {
       border: '1px solid red',
+      color: 'blue',
     },
     offset:{
       x: 50,
       y: 50
     },
-    customDragDom: ()=>{
-      return document.createElement('div')
-    }
+    // customDragDom: ()=>{
+    //   return document.createElement('div')
+    // }
   }
   )
 
   const handleDrop = e =>{
     const params = JSON.parse(e.dataTransfer.getData('text'))
     setBox([...box, params.type])
-    console.log('e. :>> ', e.dataTransfer.getData('text'));
-    //
   }
 
   return (
